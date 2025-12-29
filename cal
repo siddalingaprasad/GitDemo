@@ -3,4 +3,8 @@
 #Testing for merge
 #Division
 #doing rebase
+<<<<<<< HEAD
 #Check rebase log
+=======
+#Doing cherry pick
+>>>>>>> 5a56525 (Testing cherry pick)
