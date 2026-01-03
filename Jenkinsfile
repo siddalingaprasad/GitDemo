@@ -1,36 +1,40 @@
 pipeline {
     agent any
-    environment{
-      testvariable = "cusotm_variable_defined"
-      }
+
+    environment {
+        testvariable = "custom_variable_defined"
+    }
+
     stages {
+
         stage('Build') {
             steps {
                 sh 'echo "this is build stage"'
-		sh "echo jenkins home path -> ${BRANCH}"
-		sh "this is custom env variables -> env.testvariable"
+                sh "echo branch name -> ${env.BRANCH_NAME}"
+                sh "echo custom env variable -> ${env.testvariable}"
             }
         }
+
         stage('Test') {
-	   when{
-	      expression{
-	            Branch 'main'
-		     }
-		   }
+            when {
+                branch 'main'
+            }
             steps {
-                sh 'echo "this is test stage"'
+                sh 'echo "this is test stage (runs only on main branch)"'
             }
         }
+
         stage('Deploy') {
             steps {
-                 sh 'echo "this is deploy stage"'
+                sh 'echo "this is deploy stage"'
             }
         }
     }
-    post{
-      always{
-           sh 'echo "this is POST BLOCK for testing"'
+
+    post {
+        always {
+            sh 'echo "this is POST BLOCK for testing"'
         }
-      }
-   }
+    }
+}
 
